@@ -73,4 +73,22 @@ public abstract class Maze implements Graph {
     public int getCellCost(Position<Integer> pos) {
         return 1;   // so far all cells have the same cost
     }
+
+    @Override
+    public String toString() {
+        String retStr = "+" + "---+".repeat(mazeWidth) + "\n";
+
+        for (int i = 0; i < mazeHeight; i++) {
+            retStr += "|";
+            for (int j = 0; j < mazeWidth; j++)
+                retStr += (j == mazeWidth - 1 ? "   |" : (getCell(j, i).hasWall(getCell(j + 1, i))) ? "   |" : "    ");
+            retStr += "\n";
+
+            retStr += "+";
+            for (int j = 0; j < mazeWidth; j++)
+                retStr += (i == mazeHeight - 1 ? "---+" : (getCell(j, i).hasWall(getCell(j, i + 1))) ? "---+" : "   +");
+            retStr += "\n";
+        }
+        return retStr;
+    }
 }

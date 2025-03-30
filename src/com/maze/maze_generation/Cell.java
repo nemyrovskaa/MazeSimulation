@@ -45,6 +45,19 @@ public class Cell {
         return unvisitedNeighbours.get(random.nextInt(unvisitedNeighbours.size()));
     }
 
+    public Cell getRandomVisited() {
+        ArrayList<Cell> visitedNeighbours = new ArrayList<>();
+        for (Cell neighbour : neighbours.keySet())
+            if (neighbour.isVisited)
+                visitedNeighbours.add(neighbour);
+
+        if (visitedNeighbours.isEmpty())
+            return null;
+
+        Random random = new Random();
+        return visitedNeighbours.get(random.nextInt(visitedNeighbours.size()));
+    }
+
     public void setIsVisited() {
         isVisited = true;
     }

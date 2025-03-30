@@ -32,19 +32,6 @@ public class DFSMaze extends Maze {
 
     @Override
     public String toString() {
-        String retStr = "+" + "---+".repeat(mazeWidth) + "\n";
-
-        for (int i = 0; i < mazeHeight; i++) {
-            retStr += "|";
-            for (int j = 0; j < mazeWidth; j++)
-                retStr += (j == mazeWidth - 1 ? "   |" : (getCell(j, i).hasWall(getCell(j + 1, i))) ? "   |" : "    ");
-            retStr += "\n";
-
-            retStr += "+";
-            for (int j = 0; j < mazeWidth; j++)
-                retStr += (i == mazeHeight - 1 ? "---+" : (getCell(j, i).hasWall(getCell(j, i + 1))) ? "---+" : "   +");
-            retStr += "\n";
-        }
-        return retStr;
+        return "DFS Maze:\n" + super.toString();
     }
 }
