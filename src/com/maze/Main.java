@@ -1,30 +1,15 @@
 package com.maze;
 
-import com.maze.maze_generation.DFSMaze;
-import com.maze.maze_generation.HuntAndKillMaze;
-import com.maze.maze_generation.PrimsMaze;
-
-import java.io.PrintStream;
+import com.maze.robot.RobotPathFindAlg;
+import com.maze.robot.finding_path.Position;
+import com.maze.maze_generation.MazeType;
 
 public class Main {
     public static void main(String[] args) {
-        // MazeSimulManager mazeSimulManager = new MazeSimulManager();
-        // mazeSimulManager.startSimulation();
-
-        DFSMaze dfsMaze = new DFSMaze(10, 7);
-        dfsMaze.generate();
-        System.out.println(dfsMaze);
-
-        System.out.println();
-
-        HuntAndKillMaze huntAndKillMaze = new HuntAndKillMaze(10, 7);
-        huntAndKillMaze.generate();
-        System.out.println(huntAndKillMaze);
-
-        System.out.println();
-
-        PrimsMaze primsMaze = new PrimsMaze(10, 7);
-        primsMaze.generate();
-        System.out.println(primsMaze);
+        MazeSimulManager mazeSimulManager = new MazeSimulManager();
+        mazeSimulManager.generateMaze(MazeType.HUNT_KILL_MAZE, 15, 10);
+        mazeSimulManager.createRobot(new Position<>(0, 0), new Position<>(14, 5), "Ivan", RobotPathFindAlg.ASTAR_ROBOT_TYPE);
+        mazeSimulManager.createRobot(new Position<>(0, 0), new Position<>(7, 9), "Mila", RobotPathFindAlg.DIJKSTRA_ROBOT_TYPE);
+        mazeSimulManager.startSimulation();
     }
 }

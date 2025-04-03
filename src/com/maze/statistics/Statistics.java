@@ -5,19 +5,27 @@ import com.maze.robot.Robot;
 
 public abstract class Statistics implements Observer {  // TODO fix deprecated Observer/Observable
     // contains hash of Robot as a key and data for it as a value
-    HashMap<Integer, StatisticsData> robotsData = new HashMap<>(); //TODO concurrency hash map ?
+    private HashMap<Robot, StatisticsData> robotsData; //TODO concurrency hash map ?
+
+    public Statistics() {
+        robotsData = new HashMap<>();
+    }
+    protected abstract void statisticsChangedData(HashMap<Robot, StatisticsData> robotsData);
+
+    public HashMap<Robot, StatisticsData> getRobotsData() {
+        return robotsData;
+    }
 
     @Override
     public void update(Observable o, Object arg) {
         if(o instanceof Robot) {
-            Robot temp = (Robot) o;
-            if(!robotsData.containsKey(temp.hashCode()))
-                robotsData.put(temp.hashCode(), new StatisticsData(temp.getName()));
+            Robot robot = (Robot) o;
+            if(!robotsData.containsKey(robot))
+                robotsData.put(robot, new StatisticsData(robot.getName()));
 
-            robotsData.get(temp.hashCode()).passedPath.addElement(temp.getRobotPos());
+            robotsData.get(robot).passedPath.addElement(robot.getRobotPos());
             statisticsChangedData(robotsData);
         }
     }
 
-    protected abstract void statisticsChangedData(HashMap<Integer, StatisticsData> robotsData);
 }

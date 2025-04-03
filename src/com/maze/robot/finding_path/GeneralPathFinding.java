@@ -51,6 +51,7 @@ public abstract class GeneralPathFinding implements PathFinding {
             }
         }
 
+        path.add(start);    // added start position, so there is full path
         // reverse path to make proper order (from start to goal)
         Collections.reverse(path);
 

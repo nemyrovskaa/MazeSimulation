@@ -64,7 +64,8 @@ public abstract class Maze implements Graph {
         ArrayList<Position<Integer>> retNeighbours = new ArrayList<>();
 
         for (Cell neighbour : getCell(pos.x, pos.y).getNeighbours().keySet())
-            retNeighbours.add(neighbour.getPosition());
+            if (!getCell(pos.x, pos.y).hasWall(neighbour))
+                retNeighbours.add(neighbour.getPosition());
 
         return retNeighbours;
     }
